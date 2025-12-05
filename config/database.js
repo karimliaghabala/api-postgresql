@@ -2,8 +2,8 @@ const { createClient } = require('@supabase/supabase-js')
 require('dotenv').config()
 
 const supabase = createClient(
-  process.env.Big_News_DataBaseNewsSUPABASE_URL,
-  process.env.Big_News_DataBaseNewsSUPABASE_ANON_KEY
+  process.env.NewsData_DataBaseNewsSUPABASE_URL,
+  process.env.NewsData_DataBaseNewsSUPABASE_ANON_KEY
 )
 
 module.exports = supabase
