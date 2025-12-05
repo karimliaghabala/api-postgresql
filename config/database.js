@@ -1,38 +1,19 @@
-const { createClient } = require('@supabase/supabase-js')
+const { Pool } = require('pg')
 require('dotenv').config()
 
-const supabase = createClient(
-  process.env.NewsData_DataBaseNewsSUPABASE_URL,
-  process.env.NewsData_DataBaseNewsSUPABASE_ANON_KEY
-)
+const pool = new Pool({
+  user: process.env.NewsData_POSTGRES_USER,
+  password: process.env.NewsData_POSTGRES_PASSWORD,
+  host: process.env.NewsData_POSTGRES_HOST,
+  port: 5432,
+  database: process.env.NewsData_POSTGRES_DATABASE,
+  ssl: {
+    rejectUnauthorized: false
+  }
+})
 
-module.exports = supabase
+pool.on('error', (err) => {
+  console.error('Pool xətası:', err)
+})
 
-
-
-
-
-// const { Sequelize } = require("sequelize");
-// require('dotenv').config()
-
-// module.exports = new Sequelize(
-//   process.env.Big_News_POSTGRES_DATABASE,
-//   process.env.Big_News_POSTGRES_USER,
-//   process.env.Big_News_POSTGRES_PASSWORD,
-//   {
-//     host: process.env.Big_News_POSTGRES_HOST,
-//     dialect: "postgres",
-//     port: 5432,
-//     dialectOptions: {
-//       ssl: {
-//         require: true,
-//         rejectUnauthorized: false
-//       }
-//     }
-//   }
-// );
-
-
-
-// postgres:3991001993@localhost:3000/
-
+module.exports = pool
