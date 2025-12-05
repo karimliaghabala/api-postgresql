@@ -1,61 +1,15 @@
-const supabase = require('../config/database.js')
+// Supabase ilə işləyərkən, model tərifi lazım deyil
+// Supabase avtomatik cədvəlləri və sütunları idarə edir
+// Bunun əvəzinə, cədvəl strukturunun validasiyası üçün tip tərifi edə bilərik
 
-const News = {
-  // Bütün haberləri al
-  getAll: async () => {
-    const { data, error } = await supabase
-      .from('news')
-      .select('*')
-    
-    if (error) throw error
-    return data
-  },
-
-  // ID-yə görə haber al
-  getById: async (id) => {
-    const { data, error } = await supabase
-      .from('news')
-      .select('*')
-      .eq('id', id)
-      .single()
-    
-    if (error) throw error
-    return data
-  },
-
-  // Yeni haber əlavə et
-  create: async (newsData) => {
-    const { data, error } = await supabase
-      .from('news')
-      .insert([newsData])
-      .select()
-    
-    if (error) throw error
-    return data[0]
-  },
-
-  // Haberi güncəllə
-  update: async (id, newsData) => {
-    const { data, error } = await supabase
-      .from('news')
-      .update(newsData)
-      .eq('id', id)
-      .select()
-    
-    if (error) throw error
-    return data[0]
-  },
-
-  // Haberi sil
-  delete: async (id) => {
-    const { data, error } = await supabase
-      .from('news')
-      .delete()
-      .eq('id', id)
-    
-    if (error) throw error
-    return data
-  }
+const newsSchema = {
+  id: 'number',
+  name: 'string',
+  content: 'string',
+  status: 'number',
+  source: 'string',
+  created_at: 'string',
+  updated_at: 'string'
 }
 
-module.exports = News
+module.exports = newsSchema
