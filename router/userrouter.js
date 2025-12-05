@@ -1,28 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const newsSchema = require("../models/news.js");
 
-// GET - Bütün haberləri al
-router.get("/", async (req, res) => {
-  try {
-    const data = await newsSchema.getAll()
-    res.json(data)
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Məlumatlar yüklənə bilmədi" })
-  }
+const User = require("../models/news.js");
+
+router.get("/", (req, res) => {
+  User.findAll()
+    .then((News) => res.json(News))
+    .catch((err) => console.log(err));
 });
-
-// POST - Yeni haber əlavə et
-router.post("/", async (req, res) => {
-  try {
-    const result = await newsSchema.create(req.body)
-    res.status(201).json(result)
-    console.log("Yeni məlumat əlavə edildi");
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Məlumat əlavə olunmadı" })
-  }
+// POST - Yeni məlumat əlavə et
+router.post("/", (req, res) => {
+  User.create(req.body)
+    .then((newUser) => {
+      res.status(201).json(newUser);
+      console.log("Yeni məlumat əlavə edildi");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Məlumat əlavə olunmadı" });
+    });
 });
 
 module.exports = router;

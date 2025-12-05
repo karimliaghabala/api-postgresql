@@ -1,19 +1,11 @@
-const { Pool } = require('pg')
+const { Sequelize } = require("sequelize");
 require('dotenv').config()
 
-const pool = new Pool({
-  user: process.env.NewsData_POSTGRES_USER,
-  password: process.env.NewsData_POSTGRES_PASSWORD,
-  host: process.env.NewsData_POSTGRES_HOST,
-  port: 5432,
-  database: process.env.NewsData_POSTGRES_DATABASE,
-  ssl: {
-    rejectUnauthorized: false
-  }
-})
+module.exports = new Sequelize(process.env.POSTGRES_DATABASE, "postgres", process.env.POSTGRES_PASSWORD, {
+  host: process.env.POSTGRES_HOST,
+  dialect: "postgres"
+});
 
-pool.on('error', (err) => {
-  console.error('Pool xətası:', err)
-})
 
-module.exports = pool
+// postgres:3991001993@localhost:3000/
+

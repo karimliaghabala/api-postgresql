@@ -1,15 +1,27 @@
-// Supabase ilə işləyərkən, model tərifi lazım deyil
-// Supabase avtomatik cədvəlləri və sütunları idarə edir
-// Bunun əvəzinə, cədvəl strukturunun validasiyası üçün tip tərifi edə bilərik
+const Sequelize = require('sequelize')
 
-const newsSchema = {
-  id: 'number',
-  name: 'string',
-  content: 'string',
-  status: 'number',
-  source: 'string',
-  created_at: 'string',
-  updated_at: 'string'
-}
+const db  = require('../config/database.js')
 
-module.exports = newsSchema
+
+const User = db.define('News',{
+    name:{
+        type:Sequelize.CHAR
+    },
+    content:{
+        type:Sequelize.CHAR
+    },
+    status:{
+        type:Sequelize.SMALLINT
+    },
+    source:{
+        type:Sequelize.CHAR
+    },
+    createdAt:{
+        type:Sequelize.DATE
+    },
+    updatedAt:{
+        type:Sequelize.DATE
+    },
+
+})
+module.exports=User
