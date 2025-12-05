@@ -1,27 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const pool = require("../config/database.js");
+const News = require("../models/news.js");
 
-// GET - Bütün məlumatları al
+// GET - Bütün haberləri al
 router.get("/", async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM news')
-    res.json(result.rows)
+    const data = await News.getAll()
+    res.json(data)
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Məlumatlar yüklənə bilmədi" })
   }
 });
 
-// POST - Yeni məlumat əlavə et
+// POST - Yeni haber əlavə et
 router.post("/", async (req, res) => {
   try {
-    const { ad, soyad, email } = req.body
-    const result = await pool.query(
-      'INSERT INTO news (ad, soyad, email) VALUES ($1, $2, $3) RETURNING *',
-      [ad, soyad, email]
-    )
-    res.status(201).json(result.rows[0])
+    const result = await News.create(req.body)
+    res.status(201).json(result)
     console.log("Yeni məlumat əlavə edildi");
   } catch (err) {
     console.log(err);
