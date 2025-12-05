@@ -2,11 +2,11 @@ const { Sequelize } = require("sequelize");
 require('dotenv').config()
 
 module.exports = new Sequelize(
-  process.env.POSTGRES_DATABASE,
-  process.env.POSTGRES_USER,
-  process.env.POSTGRES_PASSWORD,
+  process.env.Big_News_POSTGRES_DATABASE,
+  process.env.Big_News_POSTGRES_USER,
+  process.env.Big_News_POSTGRES_PASSWORD,
   {
-    host: process.env.POSTGRES_HOST,
+    host: process.env.Big_News_POSTGRES_HOST,
     dialect: "postgres",
     port: 5432,
     dialectOptions: {
