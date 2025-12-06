@@ -31,7 +31,7 @@ app.use((err, req, res, next) => {
 })
 
 if (require.main === module) {
-  app.listen(3000, () => {
+  app.listen(8080, () => {
     console.log("3000 portunda işləyir 🚀")
   })
 }
