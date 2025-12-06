@@ -9,20 +9,31 @@ const db = require('./config/database.js')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-db.authenticate().then(()=>{
-    console.log("veri tabanina baglandi ✅")
-}).catch((err)=>{
-    console.log("DB Xətası:", err)
+// Health Check
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK' })
 })
+
+db.authenticate()
+  .then(() => {
+    console.log("✅ Neon-a bağlandı")
+  })
+  .catch((err) => {
+    console.error("❌ DB Xətası:", err.message)
+  })
 
 app.use("/", require('./router/userrouter.js'))
 
-// Lokal üçün listen
+// Error handling
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(500).json({ error: err.message })
+})
+
 if (require.main === module) {
-  app.listen(3000, ()=>{
+  app.listen(3000, () => {
     console.log("3000 portunda işləyir 🚀")
   })
 }
 
-// ✅ VERCEL EXPORT - BU ÇOX VACIBDIR!
 module.exports = app
