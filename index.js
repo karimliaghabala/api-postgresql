@@ -17,6 +17,6 @@ db.authenticate().then(()=>{
 })
 app.use("/",require('./router/userrouter.js'))
 
-app.listen(process.env.DATABASE_URL,()=>{
+app.listen(3000,()=>{
     console.log("3000 ishleyir")
 })
