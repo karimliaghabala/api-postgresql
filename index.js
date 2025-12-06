@@ -17,6 +17,6 @@ db.authenticate().then(()=>{
 })
 app.use("/",require('./router/userrouter.js'))
 
-app.listen(process.env.PGHOST,()=>{
-    console.log("Online database")
+app.listen(process.env.DATABASE_URL,()=>{
+    console.log("3000 ishleyir")
 })
