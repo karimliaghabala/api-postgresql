@@ -5,7 +5,7 @@ const User = require("../models/news.js");
 
 router.get("/", (req, res) => {
   User.findAll()
-    .then((News) => res.json(News))
+    .then((news) => res.json(news))
     .catch((err) => console.log(err));
 });
 // POST - Yeni məlumat əlavə et

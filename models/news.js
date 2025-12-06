@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const db  = require('../config/database.js')
 
 
-const User = db.define('News',{
+const User = db.define('news',{
     name:{
         type:Sequelize.CHAR
     },

@@ -1,11 +1,19 @@
 const { Sequelize } = require("sequelize");
 require('dotenv').config()
 
-module.exports = new Sequelize("BigDataNews" ,"postgres", "3991001993", {
-  host: "localhost",
-  dialect: "postgres"
-});
-
-
-
-
+module.exports = new Sequelize(
+  process.env.PGDATABASE,
+  process.env.PGUSER,
+  process.env.PGPASSWORD,
+  {
+    host: process.env.PGHOST,
+    dialect: "postgres",
+    port: 5432,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  }
+);
