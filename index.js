@@ -14,13 +14,16 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK' })
 })
 
-db.authenticate()
-  .then(() => {
+async function connectDatabase() {
+  try {
+    await db.authenticate()
     console.log("✅ Neon-a bağlandı")
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error("❌ DB Xətası:", err.message)
-  })
+  }
+}
+
+connectDatabase()
 
 app.use("/", require('./router/userrouter.js'))
 
