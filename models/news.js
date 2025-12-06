@@ -8,19 +8,13 @@ const User = db.define('news',{
         type:Sequelize.CHAR
     },
     content:{
-        type:Sequelize.CHAR
-    },
-    status:{
-        type:Sequelize.SMALLINT
-    },
-    source:{
-        type:Sequelize.CHAR
+        type:Sequelize.TEXT
     },
     createdAt:{
-        type:Sequelize.DATE
+        type:Sequelize.TIME
     },
     updatedAt:{
-        type:Sequelize.DATE
+        type:Sequelize.TIME
     },
 
 })
